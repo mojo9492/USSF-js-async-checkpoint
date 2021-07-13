@@ -5,12 +5,10 @@ C - use pokeAPI
 E - no exceptions at this time*/
 import fs from "fs";
 import fetch from "node-fetch";
-import { resolve } from "path";
 
 const pokemonFileName = process.argv[2];
 
 const pokeTypeSearch = function (textFile) {
-
     //read file
     if (typeof textFile === 'string') {
         const pokemon = new Promise((resolve, reject) => {
@@ -29,7 +27,9 @@ const pokeTypeSearch = function (textFile) {
 
             for (let i = 0; i < pokemonArray.length; i++) {
                 pokemonPromiseArray.push(fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonArray[i]}`)
-                    .then(res => res.json()))
+                    .then(res => res.json())
+                    .catch(error => console.log('Check your file for correct spelling and if pokemon exists', error)))
+
 
             }
 
@@ -38,20 +38,28 @@ const pokeTypeSearch = function (textFile) {
                     for (let i = 0; i < data.length; i++) {
                         const pokemon = data[i];
 
+                        if (pokemon) {
+                            const cap = pokemon.name[0].toUpperCase();
+                            const rest = pokemon.name.split(pokemon.name[0]);
 
-                        const cap = pokemon.name[0].toUpperCase();
-                        const rest = pokemon.name.split(pokemon.name[0]);
+                            const pokeCapName = rest.join(cap);
 
-                        const pokeCapName = rest.join(cap);
-
-                        if (pokemon.types[1]) {
-                            console.log(`${pokeCapName}: ${pokemon.types[0].type.name}, ${pokemon.types[1].type.name} `)
+                            if (pokemon.types[1]) {
+                                console.log(`${pokeCapName}: ${pokemon.types[0].type.name}, ${pokemon.types[1].type.name} `)
+                            }
+                            else { console.log(`${pokeCapName}: ${pokemon.types[0].type.name}`) }
+                        } else {
+                            console.log('The pokemon on this line doensn\'t exist');
                         }
-                        else { console.log(`${pokeCapName}: ${pokemon.types[0].type.name}`) }
-
                     }
                 });
         })
+    } else {
+        const errorMsg = new Error(`You need to create a file or use a the given test.txt file and type:
+         node . <fileName>
+          in order to run this function
+          `)
+        console.log(errorMsg);
     }
 }
 
