@@ -1,0 +1,22 @@
+{
+  "name": "checkpoint-async",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mojo9492/checkpoint-async.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mojo9492/checkpoint-async/issues"
+  },
+  "homepage": "https://github.com/mojo9492/checkpoint-async#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0"
+  }
+}
