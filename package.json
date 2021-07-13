@@ -2,8 +2,12 @@
   "name": "checkpoint-async",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "bin/index.js",
+  "bin": {
+    "poke": "./bin/index.js"
+  },
   "scripts": {
+    "start": "node index.js",
     "test": "test"
   },
   "repository": {
@@ -17,6 +21,8 @@
   },
   "homepage": "https://github.com/mojo9492/checkpoint-async#readme",
   "dependencies": {
-    "dotenv": "^10.0.0"
-  }
+    "dotenv": "^10.0.0",
+    "node-fetch": "^2.6.1"
+  },
+  "type": "module"
 }
